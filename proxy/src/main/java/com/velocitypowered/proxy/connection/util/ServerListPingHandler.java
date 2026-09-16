@@ -68,7 +68,7 @@ public class ServerListPingHandler {
           })
           .collect(Collectors.toList());
       Collections.shuffle(unshuffledPlayers);
-      samplePlayers = unshuffledPlayers.subList(0, Math.min(12, server.getPlayerCount()));
+      samplePlayers = unshuffledPlayers.subList(0, Math.min(12, unshuffledPlayers.size()));
     } else {
       samplePlayers = ImmutableList.of();
     }

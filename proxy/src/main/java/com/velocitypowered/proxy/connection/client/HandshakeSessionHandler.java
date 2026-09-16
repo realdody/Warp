@@ -46,7 +46,6 @@ import java.net.InetSocketAddress;
 import java.util.Optional;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.minimessage.translation.Argument;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -129,10 +128,10 @@ public class HandshakeSessionHandler implements MinecraftSessionHandler {
     if (!handshake.getProtocolVersion().isSupported()) {
       // Bump connection into correct protocol state so that we can send the disconnect packet.
       connection.setState(StateRegistry.LOGIN);
-      ic.disconnectQuietly(Component.translatable()
-              .key("multiplayer.disconnect.outdated_client")
-              .arguments(Argument.string("versions", ProtocolVersion.SUPPORTED_VERSION_STRING))
-              .build());
+      ic.disconnectQuietly(Component.translatable(
+          "multiplayer.disconnect.outdated_client",
+          Component.text(ProtocolVersion.SUPPORTED_VERSION_STRING)
+      ));
       return;
     }
 
